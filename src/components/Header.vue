@@ -1,21 +1,25 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-  </div>
+  <div class="header">{{names}}</div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Header",
+  data() {
+    return {
+      name: "fjsdkl"
+    };
+  },
   props: {
-    msg: String
+    names: String
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+.header {
+  height: 80px;
+  background-color: pink;
 }
 </style>
