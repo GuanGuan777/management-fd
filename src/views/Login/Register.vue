@@ -1,12 +1,12 @@
 <template>
-  <div class="login"></div>
+  <div class="register">注册</div>
 </template>
 
 <script>
 // @ is an alias to /src
 
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {};
   },
