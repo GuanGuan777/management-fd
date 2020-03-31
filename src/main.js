@@ -6,19 +6,32 @@ import "@/style/index.scss";
 import {
   Button,
   Tag,
-  Form
+  Form,
+  Card,
+  Input,
+  FormItem,
+  Radio,
+  RadioGroup,
+  RadioButton
 } from 'element-ui';
+// import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false;
 Vue.prototype.$ELEMENT = {
-  size: 'small',
+  size: 'medium',
   zIndex: 3000
 };
 // Vue.use(ElementUI);
 Vue.use(Button);
 Vue.use(Tag);
 Vue.use(Form);
+Vue.use(Card);
+Vue.use(Input);
+Vue.use(FormItem);
+Vue.use(Radio);
+Vue.use(RadioButton);
+Vue.use(RadioGroup);
 
 new Vue({
   router,
