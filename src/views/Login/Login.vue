@@ -9,28 +9,33 @@
           <h2>请登录</h2>
         </div>
         <!-- card body -->
-        <el-form :model="form" ref="form">
-          <el-form-item>
+        <el-form :model="form" ref="loginForm" :rules="rules">
+          <el-form-item prop="username">
             <el-input
               class="input"
               placeholder="学号//工号"
               v-model="form.username"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               class="input"
               placeholder="密码"
               v-model="form.password"
+              type="password"
             ></el-input>
-            <router-link to="/forgetPassword">忘记密码?</router-link>
           </el-form-item>
+          <router-link to="/forgetPassword">忘记密码?</router-link>
           <el-form-item>
-            <el-button class="submit-button" type="primary" @click="onSubmit"
-              >登录</el-button
+            <el-button
+              class="submit-button"
+              type="primary"
+              @click="handleLogin('loginForm')"
             >
+              登录
+            </el-button>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="category">
             <el-radio-group v-model="form.category" @change="handleChange">
               <el-radio-button :label="1" title="学生" class="radio">
                 <i class="el-icon-user-solid"></i>
@@ -52,7 +57,6 @@
 
 <script>
 // @ is an alias to /src
-
 export default {
   name: "Login",
   data() {
@@ -60,19 +64,62 @@ export default {
       form: {
         username: "",
         password: "",
-        category: 1
-      }
+        category: 1,
+        loading: false,
+      },
+      rules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          {
+            min: 6,
+            max: 20,
+            message: "长度在 6 到 20 个字符",
+            trigger: "blur",
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: "blur",
+          },
+        ],
+        category: [
+          {
+            required: true,
+            message: "请输入用户类型",
+            trigger: "change",
+          },
+        ],
+      },
     };
   },
   methods: {
-    handleLogin() {
+    handleLogin(formName) {
       //TODO：处理登录
+      this.loading = true;
+      this.$refs[formName].validate((vaild) => {
+        if (vaild) {
+          this.$store
+            .dispatch("handleLogin", this.form)
+            .then(() => {
+              this.$router.push("/home");
+              this.loading = false;
+            })
+            .catch(() => {
+              this.loading = false;
+            });
+        } else {
+          console.log();
+          return false;
+        }
+      });
     },
     handleChange() {
       // this.category = e;
-    }
+    },
   },
-  components: {}
+  components: {},
 };
 </script>
 

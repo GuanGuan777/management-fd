@@ -1,10 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Home from "@/views/Home.vue";
+import "nprogress/nprogress.css";
+import NProgress from "nprogress";
+import adminRoutes from "./admin.js";
 
 Vue.use(VueRouter);
 
-const routes = [{
+const constantRoutes = [{
     path: "/",
     name: "Home",
     component: Home
@@ -19,23 +22,47 @@ const routes = [{
       import( /* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
-    path: "/login",
-    name: "Login",
-    component: () =>
-      import("../views/Login/Login.vue")
+    path: "/user",
+    component: {
+      render: h => h("router-view")
+    }, //render函数渲染一个router-view
+    children: [{
+        path: "login",
+        name: "Login",
+        component: () =>
+          import("../views/Login/Login.vue")
+      },
+      {
+        path: "register",
+        name: "Register",
+        component: () =>
+          import("../views/Login/Register.vue")
+      }
+    ]
   },
   {
-    path: "/register",
-    name: "Register",
+    path: '*',
+    name: '404',
     component: () =>
-      import("../views/Login/Register.vue")
-  }
+      import("@/views/404.vue")
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes: constantRoutes
 });
+
+router.addRoutes(adminRoutes);
+
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+})
+
+router.afterEach(() => {
+  NProgress.done();
+})
 
 export default router;
