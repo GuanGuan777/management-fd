@@ -19,14 +19,15 @@ import store from '@/store';
 //     });
 // }
 const request = axios.create({
-    baseURL: process.env.VUE_APP_BASE_API,
+    // baseURL: process.env.VUE_APP_BASE_API,
+    baseURL: "/api/v1",
     timeout: 1000,
 
 });
 
 request.interceptors.request.use(config => {
-    if (store.token) {
-        config.headers['X-Token'] = getToken();
+    if (store.getters.token) {
+        config.headers['Authorization'] = getToken();
     }
     return config;
 }, error => {
@@ -42,14 +43,21 @@ request.interceptors.request.use(config => {
 
 request.interceptors.response.use(response => {
     const res = response.data;
-    if (res.code !== 200) {
+    console.log(res, response);
+    if (response.status !== 200) {
+        console.log("!=200");
         Message({
-            message: res.message || 'Error',
+            message: res.data.msg || '出现内部错误',
             type: 'error',
             duration: 5 * 1000
         })
-        return Promise.reject(new Error(res.message || 'Error'))
+        return Promise.reject(new Error(res.message || '出现内部错误'))
     }
+    Message({
+        message: res.msg || '成功',
+        type: 'success',
+        duration: 5 * 1000
+    })
     return response;
 }, error => {
     console.error('错误响应', error) // for debug
