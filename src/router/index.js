@@ -7,7 +7,7 @@ import adminRoutes from "./admin.js";
 
 Vue.use(VueRouter);
 
-const constantRoutes = [{
+export const constantRoutes = [{
     path: "/",
     name: "Home",
     component: Home

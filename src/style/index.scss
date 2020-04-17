@@ -11,3 +11,14 @@ a {
 ul li {
   list-style: none;
 }
+
+//表头
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+}

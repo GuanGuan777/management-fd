@@ -1,8 +1,8 @@
 <template>
   <div class="SideMenu">
     <el-menu
-      default-active=""
-      class="el-menu-vertical-demo"
+      default-active
+      class="my-el-menu"
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
@@ -11,11 +11,7 @@
         <i class="el-icon-menu"></i>
         <span slot="title" class="Header">计算机资源库</span>
       </el-menu-item>
-      <side-item
-        v-for="item in menuData"
-        :key="item.path"
-        :item="item"
-      ></side-item>
+      <side-item v-for="item in menuData" :key="item.path" :item="item"></side-item>
     </el-menu>
   </div>
 </template>
@@ -28,7 +24,7 @@ export default {
     // const menuData = this.getMenuData(this.$router.options.routes);
     return {
       menuDataList: [],
-      menuData: [],
+      menuData: []
     };
   },
   methods: {
@@ -48,22 +44,22 @@ export default {
       //   }
       // });
       return routes;
-    },
+    }
   },
   mounted() {
     console.log(this.$router);
     this.menuData = adminRoutes[0].children;
   },
   components: {
-    SideItem: SideItem,
+    SideItem: SideItem
   },
-  props: ["isCollapse"],
+  props: ["isCollapse"]
 };
 </script>
 <style lang="scss" scoped>
 .SideMenu {
   height: 100%;
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
+  .my-el-menu:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
   }

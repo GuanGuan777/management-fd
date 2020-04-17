@@ -26,3 +26,14 @@ export function logout() {
         method: 'post',
     })
 }
+
+export function addUsers(data, type) {
+    return request({
+        url: '/user/all',
+        method: 'post',
+        data,
+        param: {
+            type: type
+        }
+    })
+}

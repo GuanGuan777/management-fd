@@ -21,7 +21,7 @@ import store from '@/store';
 const request = axios.create({
     // baseURL: process.env.VUE_APP_BASE_API,
     baseURL: "/api/v1",
-    timeout: 1000,
+    timeout: 5000,
 
 });
 
@@ -47,12 +47,21 @@ request.interceptors.response.use(response => {
     if (response.status !== 200) {
         console.log("!=200");
         Message({
-            message: res.data.msg || '出现内部错误',
+            message: res.message || '出现内部错误',
             type: 'error',
             duration: 5 * 1000
         })
         return Promise.reject(new Error(res.message || '出现内部错误'))
     }
+    // if (response.data.code !== '200') {
+    //     console.log("!=200");
+    //     Message({
+    //         message: res.data.msg || '出现内部错误',
+    //         type: 'error',
+    //         duration: 5 * 1000
+    //     })
+    //     return Promise.reject(new Error(res.message || '出现内部错误'))
+    // }
     Message({
         message: res.msg || '成功',
         type: 'success',

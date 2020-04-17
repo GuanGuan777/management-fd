@@ -22,14 +22,14 @@
           </el-form-item>
           <el-form-item prop="category">
             <el-radio-group v-model="form.category" @change="handleChange">
-              <el-radio-button :label="1" title="学生" class="radio">
-                <i class="el-icon-user-solid"></i>
+              <el-radio-button label="ADMIN" title="管理员">
+                <i class="el-icon-s-custom"></i>
               </el-radio-button>
-              <el-radio-button :label="2" title="教师">
+              <el-radio-button label="STUDENT" title="学生" class="radio">
                 <i class="el-icon-user"></i>
               </el-radio-button>
-              <el-radio-button :label="3" title="管理员">
-                <i class="el-icon-s-custom"></i>
+              <el-radio-button label="TEACHER" title="教师">
+                <i class="el-icon-user-solid"></i>
               </el-radio-button>
             </el-radio-group>
           </el-form-item>
@@ -42,6 +42,8 @@
 
 <script>
 // @ is an alias to /src
+import { MessageBox, Message } from "element-ui";
+import { mapGetters } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -49,7 +51,7 @@ export default {
       form: {
         username: "",
         password: "",
-        category: 1,
+        category: "STUDENT",
         loading: false
       },
       rules: {
@@ -86,12 +88,20 @@ export default {
       this.$refs[formName].validate(vaild => {
         if (vaild) {
           this.$store
-            .dispatch("handleLogin", this.form)
-            .then(() => {
-              this.$router.push("/home");
+            .dispatch("user/handleLogin", this.form)
+            .then(result => {
               this.loading = false;
+              if (
+                this.form.category === "ADMIN" ||
+                this.form.category === "TEACHER"
+              ) {
+                this.$router.push("/admin");
+              } else if (this.form.category === "STUDENT") {
+                this.$router.push("/home");
+              }
             })
-            .catch(() => {
+            .catch(error => {
+              Message.error(error);
               this.loading = false;
             });
         } else {
@@ -104,7 +114,10 @@ export default {
       // this.category = e;
     }
   },
-  components: {}
+  components: {},
+  computed: {
+    ...mapGetters("role")
+  }
 };
 </script>
 

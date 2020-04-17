@@ -6,6 +6,9 @@ import router from "./router/index";
 import "nprogress/nprogress.css";
 import NProgress from "nprogress";
 import store from './store';
+import {
+    Message
+} from 'element-ui';
 
 router.beforeEach(async (to, from, next) => {
     NProgress.start();
@@ -19,25 +22,26 @@ router.beforeEach(async (to, from, next) => {
             });
             NProgress.done();
         } else {
-            const hasRole = store.getters.role;
+            let hasRole = store.getters.role;
+            // hasRole = 'STUDENT';
             if (hasRole) {
                 next();
             } else {
                 try {
                     const {
                         role
-                    } = await store.dispatch('getInfo');
-
-
-
+                    } = await store.dispatch('user/getInfo');
+                    const accessRoutes = await store.dispatch('permission/generateRoutes', role);
+                    console.log(accessRoutes);
+                    // router.addRoutes(accessRoutes);
                     next({
                         ...to,
                         replace: true
                     })
                     NProgress.done();
                 } catch (error) {
-                    await store.dispatch('resetToken');
-                    console.error(error);
+                    await store.dispatch('user/resetToken');
+                    Message.error(error);
                     next({
                         path: '/user/login'
                     });
