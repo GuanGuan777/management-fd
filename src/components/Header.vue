@@ -1,10 +1,10 @@
 <template>
-  <div class="header">{{names}}</div>
+  <div class="header">{{ names }}</div>
 </template>
 
 <script>
 export default {
-  name: "Header",
+  name: "header",
   data() {
     return {
       name: "fjsdkl"
@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- add "scoped" attribute to limit css to this component only -->
 <style scoped lang="scss">
 .header {
   height: 80px;

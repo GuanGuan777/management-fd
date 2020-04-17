@@ -1,18 +1,18 @@
 <template>
-  <div class="login"></div>
+  <header class="filterHeader"></header>
 </template>
-
 <script>
-// @ is an alias to /src
-
 export default {
-  name: "Login",
+  name: "filterHeader",
   data() {
     return {};
   },
+  methods: {},
+  mounted() {},
   components: {}
 };
 </script>
-
 <style lang="scss" scoped>
+.header {
+}
 </style>
