@@ -5,7 +5,6 @@
     <div>
       <div>xxx</div>
     </div>
-  </div>
 </template>
 
 <script>
