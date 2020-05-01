@@ -1,7 +1,7 @@
 const adminRoutes = [{
     path: "/admin",
     component: () =>
-        import("@/layouts/BaseLayout.vue"),
+        import("@/layouts/admin/BaseLayout.vue"),
     children: [{
             path: "/admin/index",
             name: "Index",

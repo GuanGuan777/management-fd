@@ -23,13 +23,13 @@
 import SideMenu from "./SideMenu";
 import Header from "./Header";
 // import Footer from "./Footer";
-import AppMain from "./AppMain";
+import AppMain from "@/components/global/AppMain";
 import SettingDrawer from "@/components/global/SettingDrawer";
 export default {
   data() {
     return {
       collapse: false,
-      color: "#fff",
+      color: "#fff"
     };
   },
   methods: {
@@ -38,7 +38,7 @@ export default {
     },
     handleCollapse() {
       this.collapse = !this.collapse;
-    },
+    }
   },
   mounted() {},
   components: {
@@ -46,8 +46,8 @@ export default {
     Header: Header,
     // Footer: Footer,
     SettingDrawer: SettingDrawer,
-    AppMain: AppMain,
-  },
+    AppMain: AppMain
+  }
 };
 </script>
 
