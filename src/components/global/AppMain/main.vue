@@ -24,6 +24,6 @@ export default {
 .AppMain {
   width: 100%;
   height: calc(100vh - 90px);
-  background-color: pink;
+  // background-color: pink;
 }
 </style>

@@ -5,6 +5,7 @@ import store from "./store/index";
 import './permission.js'
 import "@/style/index.scss";
 import {
+  Avatar,
   Button,
   Tag,
   Form,
@@ -20,6 +21,9 @@ import {
   Main,
   Footer,
   Menu,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
   Submenu,
   MenuItem,
   MenuItemGroup,
@@ -30,11 +34,18 @@ import {
   Message,
   Select,
   Option,
+  Popover,
   Table,
   TableColumn,
   DatePicker,
   Loading,
   Upload,
+  Link,
+  Timeline,
+  TimelineItem,
+  Divider,
+  Tabs,
+  TabPane,
 } from 'element-ui';
 // import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -49,9 +60,20 @@ Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
 
 // Vue.use(ElementUI);
+Vue.use(Avatar);
+Vue.use(Popover);
+Vue.use(Link);
+Vue.use(Timeline);
+Vue.use(TimelineItem);
+Vue.use(Divider);
+Vue.use(Tabs);
+Vue.use(TabPane);
 Vue.use(Button);
 Vue.use(Tag);
 Vue.use(Table);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 Vue.use(TableColumn);
 Vue.use(Form);
 Vue.use(DatePicker);

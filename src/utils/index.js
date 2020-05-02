@@ -44,3 +44,84 @@ export function parseTime(time, cFormat) {
     })
     return time_str;
 }
+
+export const categoryMap = [{
+        cid: 0,
+        title: "网盘",
+        clas: "fd-wangpan"
+    },
+    {
+        cid: 1,
+        title: "课件",
+        clas: "fd-kejian"
+    },
+    {
+        cid: 2,
+        title: "视频",
+        clas: "fd-shipin"
+    },
+    {
+        cid: 3,
+        title: "外链",
+        clas: "fd-wailian_icon"
+    },
+    {
+        cid: 4,
+        title: "图片",
+        clas: "fd-tupian1"
+    },
+    {
+        cid: 5,
+        title: "文件",
+        clas: "fd-wenjian1"
+    },
+    {
+        cid: 6,
+        title: "压缩包",
+        clas: "fd-geshi_yasuobaorar"
+    },
+    {
+        cid: 7,
+        title: "开发工具",
+        clas: "fd-gongju"
+    },
+    {
+        cid: 8,
+        title: "参考图书",
+        clas: "fd-gongju"
+    }
+]
+
+export const suffixMap = [{
+        title: ".txt",
+        clas: "fd-kejian"
+    },
+    {
+        title: ".mp4",
+        clas: "fd-shipin"
+    },
+    {
+        title: ".pdf",
+        clas: "fd-wailian_icon"
+    },
+    {
+        title: ".png",
+        clas: "fd-tupian1"
+    },
+    {
+        title: ".ppt",
+        clas: "fd-geshi_yasuobaorar"
+    },
+    {
+        title: ".doc",
+        clas: "fd-gongju"
+    },
+    {
+        title: ".rar",
+        clas: "fd-gongju"
+    }
+]
+
+export function parseCategory(id) {
+    return categoryMap[id];
+}

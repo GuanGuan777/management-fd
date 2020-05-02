@@ -20,6 +20,14 @@ export function getInfo() {
 
 }
 
+
+export function getCourse(uid) {
+    return request({
+        url: `/user/${uid}/courses`,
+        method: 'get',
+    })
+}
+
 export function logout() {
     return request({
         url: '/user/logout',

@@ -1,25 +1,35 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "@/views/Home.vue";
 import "nprogress/nprogress.css";
 import NProgress from "nprogress";
 import adminRoutes from "./admin.js";
+import teacherRoutes from "./teacher.js";
 
 Vue.use(VueRouter);
 
 export const constantRoutes = [{
     path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
+    redirect: "/home",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import( /* webpackChunkName: "about" */ "../views/About.vue")
+      import("@/layouts/index/BaseLayout.vue"),
+    children: [{
+        path: "/home",
+        name: "home",
+        component: () =>
+          import("../views/student/Home/index.vue")
+      },
+      {
+        path: "/course/:cid",
+        name: "course",
+        props: true,
+        component: () =>
+          import("../views/student/Detail/index.vue")
+      },
+    ]
+
   },
   {
     path: "/user",
@@ -55,6 +65,7 @@ const router = new VueRouter({
 });
 
 router.addRoutes(adminRoutes);
+router.addRoutes(teacherRoutes);
 
 
 export default router;
