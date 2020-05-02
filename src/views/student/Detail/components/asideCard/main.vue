@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <aside class="aside">
     <el-card class="asideCard" :body-style="{ padding: '0px' }">
       <div slot="header">
         <span>资源种类</span>
@@ -29,7 +29,7 @@
           >全部</el-button
         >
         <el-button
-          v-for="item in categroy"
+          v-for="item in suffix"
           :key="item"
           type="primary"
           round
@@ -40,10 +40,10 @@
         >
       </div>
     </el-card>
-  </div>
+  </aside>
 </template>
 <script>
-import { categoryMap } from "@/utils/index.js";
+import { categoryMap, suffixMap } from "@/utils/index.js";
 import { mapActions } from "vuex";
 
 export default {
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       categroy: categoryMap,
+      suffix: suffixMap,
     };
   },
   methods: {
@@ -69,16 +70,22 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.asideCard {
-  margin-top: 22px;
-  div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    .el-button {
-      margin: 5px;
-      padding: 5px;
+.aside {
+  .asideCard {
+    margin-top: 22px;
+    box-shadow: none;
+    border: none;
+
+    div {
+      padding: 10px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      flex-wrap: wrap;
+      .el-button {
+        margin: 5px;
+        padding: 5px;
+      }
     }
   }
 }

@@ -1,7 +1,13 @@
 <template>
   <header class="Header">
     <div class="container">
-      <el-link class="header-title" :underline="false" @click="handleJumpHome">计算机资源库</el-link>
+      <el-link
+        class="header-title"
+        :underline="false"
+        @click="handleJumpHome"
+        >{{ role === 2 ? "计算机资源库教师端" : "计算机资源库" }}</el-link
+      >
+      <!-- src="/teacher" -->
       <div class="second-menu">
         <div class="search">
           <el-input v-model="searchInfo" placeholder="搜索资源"></el-input>
@@ -14,7 +20,7 @@
                   src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
                   :size="30"
                 ></el-avatar>
-                <span class="name">{{info.name}}</span>
+                <span class="name">{{ info.name }}</span>
               </div>
             </el-button>
             <el-dropdown-menu slot="dropdown">
@@ -28,23 +34,27 @@
   </header>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Header",
   data() {
     return {
       searchInfo: "",
       info: {
-        name: "哈哈哈"
-      }
+        name: "哈哈哈",
+      },
     };
   },
   methods: {
     handleJumpHome() {
       this.$router.push("/home");
-    }
+    },
   },
   mounted() {},
-  components: {}
+  components: {},
+  computed: {
+    ...mapGetters("role"),
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -23,17 +23,17 @@ const actions = {
     }, role) {
         return new Promise(resolve => {
             const addRoutes = {};
-            let a;
+            let r;
             if (role === 'ADMIN') {
-                a = "admin";
+                r = "admin";
             } else if (role === 'TEACHER') {
-                a = "teacher";
+                r = "teacher";
             } else if (role === 'STUDENT') {
-                a = "student";
+                r = "student";
             }
             commit('SET_ROUTES', addRoutes);
             // resolve(addRoutes)
-            resolve(a);
+            resolve(r);
         })
     }
 }

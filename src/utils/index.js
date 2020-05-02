@@ -93,31 +93,31 @@ export const categoryMap = [{
 ]
 
 export const suffixMap = [{
-        title: "txt",
+        title: ".txt",
         clas: "fd-kejian"
     },
     {
-        title: "mp4",
+        title: ".mp4",
         clas: "fd-shipin"
     },
     {
-        title: "pdf",
+        title: ".pdf",
         clas: "fd-wailian_icon"
     },
     {
-        title: "png",
+        title: ".png",
         clas: "fd-tupian1"
     },
     {
-        title: "ppt",
+        title: ".ppt",
         clas: "fd-geshi_yasuobaorar"
     },
     {
-        title: "doc",
+        title: ".doc",
         clas: "fd-gongju"
     },
     {
-        title: "",
+        title: ".rar",
         clas: "fd-gongju"
     }
 ]

@@ -12,14 +12,14 @@
         }}</el-link>
         <template v-if="data.content.code">
           <el-divider></el-divider>
-          <span class="code">{{ `验证码：${data.content.code}` }}</span>
+          <span class="code">{{ `提取码：${data.content.code}` }}</span>
           <el-divider></el-divider>
           <el-button
             type="primary"
             @click="handleClick"
             v-clipboard:copy="data.content.code"
             v-clipboard:success="handleCopySuccess"
-            >复制验证码</el-button
+            >复制提取码</el-button
           >
         </template>
       </section>

@@ -21,15 +21,13 @@
           </el-timeline-item>
         </el-timeline>
       </section>
-      <aside>
-        <aside-card></aside-card>
-      </aside>
+      <aside-card></aside-card>
     </div>
   </div>
 </template>
 <script>
 import { getCourseDetail } from "@/api/user";
-import resourceCard from "./components/resourceCard";
+import resourceCard from "@/components/global/resourceCard";
 import asideCard from "./components/asideCard";
 import { mapGetters } from "vuex";
 
@@ -40,7 +38,7 @@ export default {
       resourceList: [
         {
           rid: "12123fs1",
-          title: "地位和黑色",
+          title: "微积分训练手册",
           category: 0,
           content: {
             url:
@@ -50,7 +48,7 @@ export default {
         },
         {
           rid: "12123fs1r",
-          title: "地位和黑色好多",
+          title: "定积分训练手册",
           category: 0,
           content: {
             url:
@@ -60,12 +58,12 @@ export default {
         },
         {
           rid: "121d23fs1",
-          title: "hhhh",
+          title: "复变函数与积分变换条件课程综述",
           category: 1,
         },
         {
           rid: "1d2123fs1",
-          title: "hhhh",
+          title: "复变函数与积分变换视频",
           category: 3,
           content: {
             url:
@@ -139,7 +137,10 @@ export default {
     }
     aside {
       width: 30%;
+      // width: 300px;
       margin-left: 50px;
+      // position: fixed;
+      // left: 1150px;
     }
   }
 }

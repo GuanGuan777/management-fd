@@ -1,5 +1,6 @@
 const adminRoutes = [{
     path: "/admin",
+    redirect: "/admin/index",
     component: () =>
         import("@/layouts/admin/BaseLayout.vue"),
     children: [{
@@ -41,7 +42,7 @@ const adminRoutes = [{
                     name: "uploadUser",
                     meta: {
                         icon: 'el-icon-s-cooperation',
-                        title: "上传用户",
+                        title: "添加用户",
                         roles: ['admin']
                     },
                     component: () =>

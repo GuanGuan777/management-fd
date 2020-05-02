@@ -3,31 +3,47 @@
     <div class="container">
       <el-avatar
         :size="50"
-        :style="{color:'#fff',fontSize:'22px',background:`${c}`}"
-      >{{data.title.slice(0,1)}}</el-avatar>
+        :style="{ color: '#fff', fontSize: '22px', background: `${c}` }"
+        >{{ data.title.slice(0, 1) }}</el-avatar
+      >
       <div class="menu">
         <div class="left">
-          <div class="title">{{data.title}}</div>
+          <div class="title">{{ data.title }}</div>
           <div class="tag">
-            <el-tag effect="plain" size="mini">学分 ：2</el-tag>
-            <el-tag effect="plain" size="mini">学时 ：24</el-tag>
+            <el-tag effect="plain" size="mini">学分 ：{{ data.credit }}</el-tag>
+            <el-tag effect="plain" size="mini">学时 ：{{ data.hours }}</el-tag>
           </div>
         </div>
         <div class="right">
-          <el-tag type="primary" effect="plain">必修课</el-tag>
+          <el-tag v-if="data.category" type="primary" effect="plain">{{
+            data.category
+          }}</el-tag>
           <!-- <el-tag type="primary">必修课</el-tag> -->
         </div>
       </div>
       <el-popover placement="bottom" title="标题" width="200" trigger="click">
-        <div class="id">{{`课程编号: ${data.sno}`}}</div>
-        <div class="desc">{{`课程简介: ${data.desc}`}}</div>
-        <el-button slot="reference" type="success" icon="el-icon-notebook-2" size="small">课程详情</el-button>
+        <div class="id">{{ `课程编号: ${data.sno}` }}</div>
+        <div class="desc">{{ `课程简介: ${data.desc}` }}</div>
+        <el-button
+          slot="reference"
+          type="success"
+          icon="el-icon-notebook-2"
+          size="small"
+          >课程详情</el-button
+        >
       </el-popover>
-      <el-button type="primary" icon="el-icon-notebook-1" size="small" @click="handleResource">课程资源</el-button>
+      <el-button
+        type="primary"
+        icon="el-icon-notebook-1"
+        size="small"
+        @click="handleResource"
+        >课程资源</el-button
+      >
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "classesCard",
   data() {
@@ -38,34 +54,40 @@ export default {
   methods: {
     handleResource() {
       //TODO:跳转资源
-      this.$router.push(`/course/${this.data.cid}`);
+      if (this.role === "STUDENT") {
+        this.$router.push(`/teacher/course/${this.data.cid}`);
+      } else if (this.role === "TEACHER") {
+        this.$router.push(`/course/${this.data.cid}`);
+        // this.$router.push(`/teacher/course/${this.data.cid}`);
+      }
     },
     handleDetail() {
       //TODO:课程详情
-    }
+    },
   },
   mounted() {
-    console.log(this.data);
+    console.log(this.role);
   },
   computed: {
     c() {
       return "#" + ((Math.random() * 0xffffff) << 0).toString(16);
-    }
+    },
+    ...mapGetters(["role"]),
   },
   components: {},
   props: {
     data: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   watch: {
     data: {
       handle: (val, oldval) => {
         this.data = val;
       },
-      deep: true
-    }
-  }
+      deep: true,
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

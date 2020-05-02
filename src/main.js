@@ -44,6 +44,8 @@ import {
   Timeline,
   TimelineItem,
   Divider,
+  Tabs,
+  TabPane,
 } from 'element-ui';
 // import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -64,7 +66,8 @@ Vue.use(Link);
 Vue.use(Timeline);
 Vue.use(TimelineItem);
 Vue.use(Divider);
-
+Vue.use(Tabs);
+Vue.use(TabPane);
 Vue.use(Button);
 Vue.use(Tag);
 Vue.use(Table);

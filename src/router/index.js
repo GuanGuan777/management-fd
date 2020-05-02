@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import "nprogress/nprogress.css";
 import NProgress from "nprogress";
 import adminRoutes from "./admin.js";
+import teacherRoutes from "./teacher.js";
 
 Vue.use(VueRouter);
 
@@ -18,14 +19,14 @@ export const constantRoutes = [{
         path: "/home",
         name: "home",
         component: () =>
-          import("../views/Home/index.vue")
+          import("../views/student/Home/index.vue")
       },
       {
         path: "/course/:cid",
         name: "course",
         props: true,
         component: () =>
-          import("../views/Detail/index.vue")
+          import("../views/student/Detail/index.vue")
       },
     ]
 
@@ -64,6 +65,7 @@ const router = new VueRouter({
 });
 
 router.addRoutes(adminRoutes);
+router.addRoutes(teacherRoutes);
 
 
 export default router;

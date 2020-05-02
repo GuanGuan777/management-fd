@@ -11,14 +11,28 @@
         <!-- card body -->
         <el-form :model="form" ref="loginForm" :rules="rules">
           <el-form-item prop="username">
-            <el-input class="input" placeholder="学号//工号" v-model="form.username"></el-input>
+            <el-input
+              class="input"
+              placeholder="学号//工号"
+              v-model="form.username"
+            ></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input class="input" placeholder="密码" v-model="form.password" type="password"></el-input>
+            <el-input
+              class="input"
+              placeholder="密码"
+              v-model="form.password"
+              type="password"
+            ></el-input>
           </el-form-item>
           <router-link to="/forgetPassword">忘记密码?</router-link>
           <el-form-item>
-            <el-button class="submit-button" type="primary" @click="handleLogin('loginForm')">登录</el-button>
+            <el-button
+              class="submit-button"
+              type="primary"
+              @click="handleLogin('loginForm')"
+              >登录</el-button
+            >
           </el-form-item>
           <el-form-item prop="category">
             <el-radio-group v-model="form.category" @change="handleChange">
@@ -52,7 +66,7 @@ export default {
         username: "",
         password: "",
         category: "STUDENT",
-        loading: false
+        loading: false,
       },
       rules: {
         username: [
@@ -61,46 +75,45 @@ export default {
             min: 1,
             max: 20,
             message: "长度在 1 到 20 个字符",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         password: [
           {
             required: true,
             message: "请输入密码",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         category: [
           {
             required: true,
             message: "请输入用户类型",
-            trigger: "change"
-          }
-        ]
-      }
+            trigger: "change",
+          },
+        ],
+      },
     };
   },
   methods: {
     handleLogin(formName) {
       //TODO：处理登录
       this.loading = true;
-      this.$refs[formName].validate(vaild => {
+      this.$refs[formName].validate((vaild) => {
         if (vaild) {
           this.$store
             .dispatch("user/handleLogin", this.form)
-            .then(result => {
+            .then((result) => {
               this.loading = false;
-              if (
-                this.form.category === "ADMIN" ||
-                this.form.category === "TEACHER"
-              ) {
+              if (this.form.category === "ADMIN") {
                 this.$router.push("/admin");
+              } else if (this.form.category === "TEACHER") {
+                this.$router.push("/teacher");
               } else if (this.form.category === "STUDENT") {
                 this.$router.push("/home");
               }
             })
-            .catch(error => {
+            .catch((error) => {
               Message.error(error);
               this.loading = false;
             });
@@ -112,12 +125,12 @@ export default {
     },
     handleChange() {
       // this.category = e;
-    }
+    },
   },
   components: {},
   computed: {
-    ...mapGetters("role")
-  }
+    ...mapGetters("role"),
+  },
 };
 </script>
 
