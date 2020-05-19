@@ -23,8 +23,8 @@
         </div>
       </div>
       <el-popover placement="bottom" title="标题" width="200" trigger="click">
-        <div class="id">{{ `课程编号: ${data.sno}` }}</div>
-        <div class="desc">{{ `课程简介: ${data.desc}` }}</div>
+        <div class="id">{{ `课程编号: ${data.courseId}` }}</div>
+        <div v-if="data.description" class="desc">{{ `课程简介: ${data.description}` }}</div>
         <el-button slot="reference" type="success" icon="el-icon-notebook-2" size="small">课程详情</el-button>
       </el-popover>
       <el-button type="primary" icon="el-icon-notebook-1" size="small" @click="handleResource">课程资源</el-button>
@@ -44,10 +44,10 @@ export default {
     handleResource() {
       //TODO:跳转资源
       if (this.role === "STUDENT") {
-        this.$router.push(`/course/${this.data.cid}`);
+        this.$router.push(`/course/${this.data.courseId}`);
       } else if (this.role === "TEACHER") {
         // this.$router.push(`/course/${this.data.cid}`);
-        this.$router.push(`/teacher/course/${this.data.cid}`);
+        this.$router.push(`/teacher/course/${this.data.courseId}`);
       }
     },
     handleDetail() {

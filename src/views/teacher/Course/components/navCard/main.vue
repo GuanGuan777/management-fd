@@ -32,7 +32,7 @@
             <el-input v-model="form.title" placeholder="请输入标题"></el-input>
           </el-form-item>
           <el-form-item label="描述">
-            <el-input v-model="form.desc" placeholder="请输入描述"></el-input>
+            <el-input v-model="form.description" placeholder="请输入描述"></el-input>
           </el-form-item>
           <el-form-item label>
             <el-button type="success" @click="handlePrev">上一步</el-button>
@@ -46,7 +46,7 @@
               <el-input v-model="form.url" placeholder="网盘地址"></el-input>
             </el-form-item>
             <el-form-item label="提取码">
-              <el-input v-model="form.code" placeholder="提取码"></el-input>
+              <el-input v-model="form.extractingCode" placeholder="提取码"></el-input>
             </el-form-item>
           </template>
           <template v-else-if="form.type === 3">
@@ -59,7 +59,7 @@
               <pic-upload :limitNum="9" @getData="getData"></pic-upload>
             </el-form-item>
           </template>
-          <template>
+          <template v-else>
             <template v-if="form.type === 2">
               <el-form-item label="上传封面">
                 <cover-upload @getCover="getCover" :limitNum="1"></cover-upload>
@@ -95,10 +95,11 @@ export default {
         type: 1,
         title: "",
         url: "",
-        code: "",
+        extractingCode: "",
         cover: "",
         fileName: "",
-        courseId: 1
+        courseId: 1,
+        description: ""
       },
       active: 0,
       categoryMap: categoryMap

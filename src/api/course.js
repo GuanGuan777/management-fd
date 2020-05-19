@@ -8,7 +8,7 @@ export function getCourseDetail(cid) {
     })
 }
 
-export function getCourse(cid) {
+export function getCourse() {
     return request({
         url: `/course`,
         method: 'get',

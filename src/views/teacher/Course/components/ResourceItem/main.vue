@@ -43,7 +43,7 @@
             </el-image>
             <icon v-if="data.type === 2" class="iconfont fd-bofang icon-start"></icon>
           </div>
-          <span>{{ data.desc }}</span>
+          <span>{{ data.description }}</span>
           <el-dialog title="视频播放" :visible.sync="dialogVideoVisible" @close="handleClose">
             <my-video ref="myPlayer" :src="data.url" :cover="data.cover"></my-video>
             <!-- <video class="video" controls>
@@ -90,6 +90,7 @@ import { parseCategory, option } from "@/utils/index.js";
 import myVideo from "@/components/global/myVideo";
 import tag from "@/components/global/tag";
 import { deleteResource, updateResource } from "@/api/resource";
+
 export default {
   name: "ResourceItem",
   data() {

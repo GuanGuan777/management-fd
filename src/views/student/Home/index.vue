@@ -9,31 +9,26 @@
 // @ is an alias to /src
 import profileCard from "./components/profileCard";
 import classesCard from "@/components/global/classesCard";
+import { getCourse } from "@/api/course";
 export default {
   name: "Home",
   data() {
     return {
-      list: [
-        {
-          cid: 1,
-          title: "高等数学",
-          category: "必修课",
-          credit: 2,
-          hours: 64
-        },
-        {
-          cid: 2,
-          title: "大学英语",
-          category: "必修课",
-          credit: 2,
-          hours: 64
-        }
-      ]
+      list: []
     };
   },
   components: {
     profileCard: profileCard,
     classesCard: classesCard
+  },
+  mounted() {
+    getCourse()
+      .then(result => {
+        this.list = result.data.data;
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 };
 </script>

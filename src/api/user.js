@@ -45,3 +45,14 @@ export function addUsers(data, type) {
         }
     })
 }
+
+export function getUsers(data, role) {
+    return request({
+        url: '/user',
+        method: 'get',
+        data,
+        param: {
+            role: role
+        }
+    })
+}

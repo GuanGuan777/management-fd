@@ -62,11 +62,11 @@ request.interceptors.response.use(response => {
     //     })
     //     return Promise.reject(new Error(res.message || '出现内部错误'))
     // }
-    Message({
-        message: res.msg || '成功',
-        type: 'success',
-        duration: 5 * 1000
-    })
+    // Message({
+    //     message: res.msg || '成功',
+    //     type: 'success',
+    //     duration: 5 * 1000
+    // })
     return response;
 }, error => {
     console.error('错误响应', error) // for debug

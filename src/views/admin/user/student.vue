@@ -70,22 +70,27 @@
           <span>{{ row.studentId }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="学号" width="110px" align="center">
+        <template slot-scope="{ row }">
+          <span>{{ row.sno }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="姓名" width="110px" align="center">
         <template slot-scope="{ row }">
           <span>{{ row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="出生年月" width="150px" align="center">
+      <el-table-column label="出生年月" width="130px" align="center">
         <template slot-scope="{ row }">
           <span>{{ row.birthdate }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="入学日期" width="150px" align="center">
+      <el-table-column label="入学日期" width="130px" align="center">
         <template slot-scope="{ row }">
           <span>{{ row.admissionDate }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="毕业日期" width="150px" align="center">
+      <el-table-column label="毕业日期" width="130px" align="center">
         <template slot-scope="{ row }">
           <span>{{ row.graduationDate }}</span>
         </template>
@@ -105,7 +110,7 @@
           <span>{{ row.classes }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="性别" class-name width="100">
+      <el-table-column label="性别" class-name width="60">
         <template slot-scope="{ row }">
           <el-tag :type="row.sex | statusFilter">{{ sex(row.sex) }}</el-tag>
         </template>
@@ -113,7 +118,7 @@
       <!-- <el-table-column label="课程" class-name="courses-col">
         <template slot-scope="{row}"></template>
       </el-table-column>-->
-      <el-table-column label="操作" align="center" width="300" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width class-name="small-padding fixed-width">
         <template slot-scope="{ row, $index }">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
           <el-button size="mini" type="success" @click="handleModifyStatus(row, 'locked')">锁定</el-button>
@@ -188,6 +193,7 @@
 </template>
 <script>
 import { parseTime } from "@/utils";
+import { getUsers } from "@/api/user";
 export default {
   name: "student",
   data() {
@@ -352,7 +358,11 @@ export default {
       // });
     }
   },
-  mounted() {},
+  mounted() {
+    getUsers()
+      .then(result => {})
+      .catch(err => {});
+  },
   components: {},
   computed: {
     sex() {
