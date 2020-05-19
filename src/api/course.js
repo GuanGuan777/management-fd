@@ -23,6 +23,22 @@ export function addCourse(data) {
     })
 }
 
+
+export function addCourse(id, data) {
+    return request({
+        url: '/course/${id}',
+        method: 'put',
+        data,
+    })
+}
+
+export function addCourse(id) {
+    return request({
+        url: '/course/${id}',
+        method: 'delete',
+    })
+}
+
 export function addResource(data) {
     return request({
         url: `/courses/${cid}/resources`,

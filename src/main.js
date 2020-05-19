@@ -46,11 +46,24 @@ import {
   Divider,
   Tabs,
   TabPane,
+  Image,
+  Steps,
+  Step,
+  ButtonGroup,
 } from 'element-ui';
 // import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import VueVideoPlayer from 'vue-video-player';
+import 'video.js/dist/video-js.css'
+import 'vue-video-player/src/custom-theme.css'
 import * as filters from "./filters";
 
+Vue.use(VueVideoPlayer,
+  /* {
+  options: global default options,
+  events: global videojs events
+} */
+)
 Vue.config.productionTip = false;
 Vue.prototype.$ELEMENT = {
   size: 'medium',
@@ -62,13 +75,17 @@ Vue.prototype.$message = Message;
 // Vue.use(ElementUI);
 Vue.use(Avatar);
 Vue.use(Popover);
+Vue.use(Steps);
+Vue.use(Step);
 Vue.use(Link);
 Vue.use(Timeline);
 Vue.use(TimelineItem);
 Vue.use(Divider);
 Vue.use(Tabs);
+Vue.use(Image);
 Vue.use(TabPane);
 Vue.use(Button);
+Vue.use(ButtonGroup);
 Vue.use(Tag);
 Vue.use(Table);
 Vue.use(Dropdown);

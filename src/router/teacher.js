@@ -39,6 +39,7 @@ const teacherRoutes = [{
         {
             path: "/teacher/course/:cid",
             name: "teacherCourse",
+            props: true,
             meta: {
                 icon: 'el-icon-s-cooperation',
                 title: "课程管理",
