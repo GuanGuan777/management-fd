@@ -13,7 +13,7 @@
         <el-timeline>
           <el-timeline-item
             v-for="item in fileterResourceList"
-            :key="item.rid"
+            :key="item.resourceId"
             timestamp="2018/4/12"
             placement="top"
           >
@@ -27,6 +27,7 @@
 </template>
 <script>
 import { getCourseDetail } from "@/api/user";
+import { getResource } from "@/api/course";
 import resourceCard from "@/components/global/resourceCard";
 import asideCard from "./components/asideCard";
 import { mapGetters } from "vuex";
@@ -43,8 +44,8 @@ export default {
           content: {
             url:
               "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/",
-            code: "R43J",
-          },
+            code: "R43J"
+          }
         },
         {
           rid: "12123fs1r",
@@ -53,13 +54,13 @@ export default {
           content: {
             url:
               "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/",
-            code: "",
-          },
+            code: ""
+          }
         },
         {
           rid: "121d23fs1",
           title: "复变函数与积分变换条件课程综述",
-          category: 1,
+          category: 1
         },
         {
           rid: "1d2123fs1",
@@ -67,10 +68,10 @@ export default {
           category: 3,
           content: {
             url:
-              "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/",
-          },
-        },
-      ],
+              "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/"
+          }
+        }
+      ]
     };
   },
   computed: {
@@ -78,23 +79,25 @@ export default {
     fileterResourceList() {
       return this.category === undefined
         ? this.resourceList
-        : this.resourceList.filter(
-            (item) => item.category === this.category.cid
-          );
-    },
+        : this.resourceList.filter(item => item.type === this.category.cid);
+    }
   },
   methods: {
-    getResourceList() {
-      getCourseDetail()
-        .then((result) => {})
-        .catch((err) => {});
-    },
+    getResourceList(id) {
+      getResource(id)
+        .then(result => {
+          this.resourceList = this.result.data;
+        })
+        .catch(err => {});
+    }
   },
-  mounted() {},
+  mounted() {
+    this.getResourceList(this.$route.params.cid);
+  },
   components: {
     resourceCard: resourceCard,
-    asideCard: asideCard,
-  },
+    asideCard: asideCard
+  }
 };
 </script>
 <style lang="scss" scoped>

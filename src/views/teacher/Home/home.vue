@@ -2,13 +2,9 @@
   <div class="home">
     <el-tabs :tab-position="tabPosition" style="height: 200px;">
       <el-tab-pane label="课程管理">
-        <classes-card
-          v-for="item in list"
-          :key="item.id"
-          :data="item"
-        ></classes-card>
+        <classes-card v-for="item in list" :key="item.id" :data="item"></classes-card>
       </el-tab-pane>
-      <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+      <!-- <el-tab-pane label="配置管理">配置管理</el-tab-pane> -->
     </el-tabs>
   </div>
 </template>
@@ -20,25 +16,25 @@ export default {
     return {
       list: [
         {
-          cid: "63012CC006",
+          cid: 1,
           title: "高等数学",
           credit: 2,
-          hours: 64,
+          hours: 64
         },
         {
-          cid: "63012CC006",
+          cid: 2,
           title: "大学英语",
           credit: 2,
-          hours: 64,
-        },
-      ],
+          hours: 64
+        }
+      ]
     };
   },
   methods: {},
   mounted() {},
   components: {
-    classesCard: classesCard,
-  },
+    classesCard: classesCard
+  }
 };
 </script>
 <style lang="scss" scoped>

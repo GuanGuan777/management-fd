@@ -5,7 +5,7 @@ import {
 } from '@/utils/auth'
 import {
     login,
-    getInfo
+    getInfo,
 } from "@/api/user"
 
 const state = {
@@ -102,7 +102,7 @@ const actions = {
             removeToken();
             resolve();
         })
-    }
+    },
 }
 
 

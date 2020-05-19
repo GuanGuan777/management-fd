@@ -1,4 +1,3 @@
-
 <template>
   <div class="coverUpload">
     <el-upload
@@ -46,6 +45,7 @@ export default {
       upload(formData)
         .then(result => {
           console.log("成功上传");
+          this.$emit("getCover", result.data.fileUri);
           param.onSuccess();
         })
         .catch(err => {

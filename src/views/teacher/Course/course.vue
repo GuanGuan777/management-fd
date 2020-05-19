@@ -5,8 +5,8 @@
       <el-timeline>
         <el-timeline-item
           v-for="item in resourceList"
-          :key="item.rid"
-          :timestamp="item.update_time"
+          :key="item.resourceId"
+          :timestamp="item.updateTime"
           placement="top"
         >
           <resource-item :data="item"></resource-item>
@@ -18,6 +18,7 @@
 <script>
 import navCard from "./components/navCard";
 import resourceItem from "./components/ResourceItem";
+import { getResource } from "@/api/course";
 export default {
   name: "course",
   data() {
@@ -30,8 +31,8 @@ export default {
           content: {
             url:
               "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/hhhhhhhhhfdsjflskdjflsdfljsddljflsdjfljsdlfjsdljflsdjflhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
-            code: "R43J",
-          },
+            code: "R43J"
+          }
         },
         {
           rid: "12123fs1r",
@@ -40,16 +41,16 @@ export default {
           content: {
             url:
               "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/",
-            code: "",
-          },
+            code: ""
+          }
         },
         {
           rid: "121d23fs1",
           title: "计算机网络课件",
           category: 1,
           content: {
-            fielName: "计算机网络.ppt",
-          },
+            fielName: "计算机网络.ppt"
+          }
         },
         {
           rid: "1d2o23fs1",
@@ -60,8 +61,8 @@ export default {
             cover:
               "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
             fileName: "Http协议详解.mp4",
-            url: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4",
-          },
+            url: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+          }
         },
         {
           rid: "1d2123fs1",
@@ -69,8 +70,8 @@ export default {
           category: 3,
           content: {
             url:
-              "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/",
-          },
+              "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/"
+          }
         },
         {
           rid: "1dd212d3fs1",
@@ -78,55 +79,64 @@ export default {
           category: 4,
           content: {
             url: [
-              "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
+              "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
             ],
             thumbnails: [
               "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg",
-              "https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg",
-            ],
-          },
+              "https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg"
+            ]
+          }
         },
         {
           rid: "15d212d3dddfs1",
           title: "第一次作业要求",
           category: 5,
           content: {
-            fileName: "第一次作业要求.doc",
-          },
+            fileName: "第一次作业要求.doc"
+          }
         },
         {
           rid: "5d212d3dddfs1",
           title: "作业合集",
           category: 6,
           content: {
-            fileName: "作业合集.rar",
-          },
+            fileName: "作业合集.rar"
+          }
         },
         {
           rid: "5d2dsdddfs1",
           title: "idea",
           category: 7,
           content: {
-            fileName: "idea.exe",
-          },
+            fileName: "idea.exe"
+          }
         },
         {
           rid: "5d2dsssddfs1",
           title: "参考图书",
           category: 8,
           content: {
-            fileName: "参考图书.pdf",
-          },
-        },
-      ],
+            fileName: "参考图书.pdf"
+          }
+        }
+      ]
     };
   },
   methods: {},
-  mounted() {},
+  mounted() {
+    getResource(this.$route.params.cid)
+      .then(result => {
+        this.resourceList = result.data.data;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  },
   components: {
     navCard: navCard,
-    resourceItem: resourceItem,
-  },
+    resourceItem: resourceItem
+  }
+  // props: ["cid"]
 };
 </script>
 <style lang="scss" scoped>

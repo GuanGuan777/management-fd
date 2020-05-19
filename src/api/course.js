@@ -24,7 +24,7 @@ export function addCourse(data) {
 }
 
 
-export function addCourse(id, data) {
+export function updateCourse(id, data) {
     return request({
         url: '/course/${id}',
         method: 'put',
@@ -32,24 +32,16 @@ export function addCourse(id, data) {
     })
 }
 
-export function addCourse(id) {
+export function deleteCourse(id) {
     return request({
         url: '/course/${id}',
         method: 'delete',
     })
 }
 
-export function addResource(data) {
+export function getResource(cid) {
     return request({
-        url: `/courses/${cid}/resources`,
-        method: 'post',
-        data,
-    })
-}
-
-export function getResource() {
-    return request({
-        url: `/courses/${cid}/resources`,
+        url: `/course/${cid}/resources`,
         method: 'get',
     })
 }

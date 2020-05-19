@@ -51,8 +51,8 @@ export default {
       this.$refs.upload.submit();
       multipleUpload(this.formData)
         .then(result => {
-          console.info(result);
-          console.log(result);
+          console.info(result.data);
+          this.$emit("getData", result.data);
         })
         .catch(err => {
           console.error(err);

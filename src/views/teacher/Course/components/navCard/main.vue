@@ -56,13 +56,15 @@
           </template>
           <template v-else-if="form.type === 4">
             <el-form-item label>
-              <pic-upload :limitNum="9"></pic-upload>
+              <pic-upload :limitNum="9" @getData="getData"></pic-upload>
             </el-form-item>
           </template>
-          <template v-else-if="form.type === 1 || form.type === 2">
-            <el-form-item label="上传封面">
-              <cover-upload :limitNum="1"></cover-upload>
-            </el-form-item>
+          <template>
+            <template v-if="form.type === 2">
+              <el-form-item label="上传封面">
+                <cover-upload @getCover="getCover" :limitNum="1"></cover-upload>
+              </el-form-item>
+            </template>
             <el-form-item label="上传文件">
               <video-upload @getFile="getFile"></video-upload>
             </el-form-item>
@@ -95,19 +97,38 @@ export default {
         url: "",
         code: "",
         cover: "",
-        fileName: ""
+        fileName: "",
+        courseId: 1
       },
       active: 0,
       categoryMap: categoryMap
     };
   },
   methods: {
+    getData(data) {
+      let downloadUrl = data
+        .map(item => {
+          return item.fileDownloadUri;
+        })
+        .join(",");
+      let Url = data
+        .map(item => {
+          return item.fileUri;
+        })
+        .join(",");
+      this.$set(this.form, "url", Url);
+      this.$set(this.form, "downloadUrl", downloadUrl);
+    },
+    getCover(url) {
+      this.$set(this.form, "cover", url);
+    },
     getFile(file) {
       let { data } = file;
-      this.$set(this.form, "fileName", file.fileName);
-      this.$set(this.form, "fileType", file.fileType);
-      this.$set(this.form, "url", file.fileDownloadUri);
-      this.$set(this.form, "fileSize", file.size);
+      this.$set(this.form, "fileName", data.fileName);
+      this.$set(this.form, "fileType", data.fileType);
+      this.$set(this.form, "downloadUrl", data.fileDownloadUri);
+      this.$set(this.form, "url", data.fileUri);
+      this.$set(this.form, "fileSize", data.size);
     },
     handleAdd() {},
     handleNext() {
@@ -130,13 +151,12 @@ export default {
           console.info(result);
         })
         .catch(err => {
-          console.erroe(err);
+          console.error(err);
         });
     }
   },
   mounted() {
-    console.log(categoryMap);
-    this.$set(this.form, "courseId", this.cid);
+    this.$set(this.form, "courseId", this.$route.params.cid);
   },
   components: {
     picUpload: picUpload,
