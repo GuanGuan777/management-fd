@@ -1,42 +1,38 @@
 <template>
   <el-card class="ResourceItem" :body-style="{ padding: '0px' }">
     <div class="left">
-      <tag :data="category(data.category)"></tag>
+      <tag :data="category(data.type)"></tag>
     </div>
     <div class="menu">
-      <template v-if="data.category === 0 || data.category === 3">
+      <template v-if="data.type === 0 || data.type === 3">
         <div class="up">
           <h1>{{ data.title }}</h1>
           <div>
             链接：
-            <el-link
-              v-if="data.content && data.content.url"
-              :underline="false"
-              :href="data.content.url"
-            >{{ data.content.url }}</el-link>
+            <el-link v-if="data.url" :underline="false" :href="data.url">{{ data.url }}</el-link>
           </div>
         </div>
-        <div class="down" v-if="data.content.code">
-          <span>{{ `提取码：${data.content.code}` }}</span>
+        <div class="down" v-if="data.extractingCode">
+          <span>{{ `提取码：${data.extractingCode}` }}</span>
         </div>
       </template>
-      <template v-else-if="data.category === 1">
+      <template v-else-if="data.type === 1">
         <div class="up">
           <h1>{{ data.title }}</h1>
-          <el-link v-if="data.content && data.content.url" :underline="false">
+          <el-link v-if="data.url" :underline="false">
             {{
-            data.content.url
+            data.url
             }}
           </el-link>
         </div>
       </template>
-      <template v-else-if="data.category === 2">
+      <template v-else-if="data.type === 2">
         <div class="up">
           <h1>{{ data.title }}</h1>
           <div style="position:relative;margin:10px 0;">
             <el-image
               class="cover"
-              :src="data.content.cover"
+              :src="data.cover"
               @click="dialogVideoVisible = true"
               style="width: 160px; height: 100px;border-radius:8px;"
             >
@@ -45,28 +41,28 @@
                 <span class="dot">...</span>
               </div>
             </el-image>
-            <icon v-if="data.category === 2" class="iconfont fd-bofang icon-start"></icon>
+            <icon v-if="data.type === 2" class="iconfont fd-bofang icon-start"></icon>
           </div>
           <span>{{ data.desc }}</span>
           <el-dialog title="视频播放" :visible.sync="dialogVideoVisible" @close="handleClose">
-            <my-video ref="myPlayer" :src="data.content.url" :cover="data.content.cover"></my-video>
+            <my-video ref="myPlayer" :src="data.url" :cover="data.cover"></my-video>
             <!-- <video class="video" controls>
               <source src="data.content.url" type="video/mp4" />
             </video>-->
           </el-dialog>
         </div>
       </template>
-      <template v-else-if="data.category === 4">
+      <template v-else-if="data.type === 4">
         <div class="up">
           <h1>{{ data.title }}</h1>
           <el-image
             class="thuminals"
-            v-for="item in data.content.thumbnails"
+            v-for="item in thumbnails"
             :key="item"
             :src="item"
             fit="contain"
             style="width: 80px; height: 100px;border-radius:8px;"
-            :preview-src-list="data.content.thumbnails"
+            :preview-src-list="thumbnails"
           >
             <div slot="placeholder" class="image-slot">
               加载中
@@ -83,7 +79,7 @@
     </div>
     <div>
       <div class="ebg">
-        <el-button type="primary" @click="handleChange" icon="el-icon-edit" circle></el-button>
+        <el-button type="primary" @click="handleUpdate" icon="el-icon-edit" circle></el-button>
         <el-button type="danger" @click="handleDelete" icon="el-icon-delete" circle></el-button>
       </div>
     </div>
@@ -93,6 +89,7 @@
 import { parseCategory, option } from "@/utils/index.js";
 import myVideo from "@/components/global/myVideo";
 import tag from "@/components/global/tag";
+import { deleteResource, updateResource } from "@/api/resource";
 export default {
   name: "ResourceItem",
   data() {
@@ -107,6 +104,9 @@ export default {
     },
     player() {
       return this.$refs.myPlayer.$children[0].player;
+    },
+    thumbnails() {
+      return this.data.url.split(",");
     }
   },
   watch: {
@@ -119,7 +119,7 @@ export default {
         //   type: "video/mp4",
         //   src: newVal.content.url,
         // });
-        if (this.data.category === 2) {
+        if (this.data.type === 2) {
           console.log(this.playerOptions.sources);
         }
       },
@@ -129,15 +129,29 @@ export default {
   methods: {
     handleClose() {
       this.player.pause();
+    },
+    handleUpdate(id) {
+      updateResource(id, this.form)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(err => {});
+    },
+    handleDelete() {
+      deleteResource(this.data.resourceId)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(err => {});
     }
   },
   mounted() {
-    let op = this.data.content.url;
+    let op = this.data.url;
     this.$set(this.playerOptions.sources, 0, {
       type: "video/mp4",
       src: op
     });
-    if (this.data.category === 2) {
+    if (this.data.type === 2) {
       console.log(this.playerOptions.sources);
     }
   },

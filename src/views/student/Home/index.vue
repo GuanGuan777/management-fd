@@ -1,11 +1,7 @@
 <template>
   <div class="home">
     <profile-card></profile-card>
-    <classes-card
-      v-for="item in list"
-      :key="item.id"
-      :data="item"
-    ></classes-card>
+    <classes-card v-for="item in list" :key="item.id" :data="item"></classes-card>
   </div>
 </template>
 
@@ -19,26 +15,26 @@ export default {
     return {
       list: [
         {
-          cid: "63012CC006",
+          cid: 1,
           title: "高等数学",
           category: "必修课",
           credit: 2,
-          hours: 64,
+          hours: 64
         },
         {
-          cid: "63012CC006",
+          cid: 2,
           title: "大学英语",
           category: "必修课",
           credit: 2,
-          hours: 64,
-        },
-      ],
+          hours: 64
+        }
+      ]
     };
   },
   components: {
     profileCard: profileCard,
-    classesCard: classesCard,
-  },
+    classesCard: classesCard
+  }
 };
 </script>
 
