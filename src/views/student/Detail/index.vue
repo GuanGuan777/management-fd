@@ -36,42 +36,7 @@ export default {
   name: "Detail",
   data() {
     return {
-      resourceList: [
-        {
-          rid: "12123fs1",
-          title: "微积分训练手册",
-          category: 0,
-          content: {
-            url:
-              "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/",
-            code: "R43J"
-          }
-        },
-        {
-          rid: "12123fs1r",
-          title: "定积分训练手册",
-          category: 0,
-          content: {
-            url:
-              "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/",
-            code: ""
-          }
-        },
-        {
-          rid: "121d23fs1",
-          title: "复变函数与积分变换条件课程综述",
-          category: 1
-        },
-        {
-          rid: "1d2123fs1",
-          title: "复变函数与积分变换视频",
-          category: 3,
-          content: {
-            url:
-              "http://pan.baidu.com/mbox/homepage?short=i4uKw9v#share/type=session/"
-          }
-        }
-      ]
+      resourceList: []
     };
   },
   computed: {
@@ -82,13 +47,25 @@ export default {
         : this.resourceList.filter(item => item.type === this.category.cid);
     }
   },
+  watch: {
+    resourceList: {
+      handler: function(newVal, oldVal) {
+        this.resourceList = newVal;
+      },
+      deep: true
+    }
+  },
   methods: {
     getResourceList(id) {
       getResource(id)
         .then(result => {
-          this.resourceList = this.result.data;
+          console.log("----------");
+          this.resourceList = result.data.data;
+          console.log(this.resourceList);
         })
-        .catch(err => {});
+        .catch(err => {
+          console.error(err);
+        });
     }
   },
   mounted() {

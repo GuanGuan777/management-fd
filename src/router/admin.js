@@ -12,19 +12,19 @@ const adminRoutes = [{
                 roles: ['admin']
             },
             component: () =>
-                import("../views/Login/Login.vue")
+                import("../views/admin/home.vue")
         },
-        {
-            path: "/admin/dashboard",
-            name: "Dashboard",
-            meta: {
-                icon: 'el-icon-s-cooperation',
-                title: "分析",
-                roles: ['admin']
-            },
-            component: () =>
-                import("../views/Login/Login.vue")
-        },
+        // {
+        //     path: "/admin/dashboard",
+        //     name: "Dashboard",
+        //     meta: {
+        //         icon: 'el-icon-s-cooperation',
+        //         title: "分析",
+        //         roles: ['admin']
+        //     },
+        //     component: () =>
+        //         import("../views/Login/Login.vue")
+        // },
         {
             path: "/admin/user",
             name: "User",
@@ -92,7 +92,7 @@ const adminRoutes = [{
                 roles: ['admin']
             },
             component: () =>
-                import("../views/Login/Login.vue")
+                import("../views/admin/audit.vue")
         },
     ]
 }];

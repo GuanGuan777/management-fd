@@ -10,28 +10,24 @@
 </template>
 <script>
 import classesCard from "@/components/global/classesCard";
+import { getCourse } from "@/api/course";
 export default {
   name: "home",
   data() {
     return {
-      list: [
-        {
-          cid: 1,
-          title: "高等数学",
-          credit: 2,
-          hours: 64
-        },
-        {
-          cid: 2,
-          title: "大学英语",
-          credit: 2,
-          hours: 64
-        }
-      ]
+      list: []
     };
   },
   methods: {},
-  mounted() {},
+  mounted() {
+    getCourse()
+      .then(result => {
+        this.list = result.data.data;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  },
   components: {
     classesCard: classesCard
   }
