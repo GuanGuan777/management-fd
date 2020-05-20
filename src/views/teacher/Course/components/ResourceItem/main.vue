@@ -90,6 +90,7 @@ import { parseCategory, option } from "@/utils/index.js";
 import myVideo from "@/components/global/myVideo";
 import tag from "@/components/global/tag";
 import { deleteResource, updateResource } from "@/api/resource";
+import { MessageBox, Message } from "element-ui";
 
 export default {
   name: "ResourceItem",
@@ -142,6 +143,10 @@ export default {
       deleteResource(this.data.resourceId)
         .then(result => {
           console.log(result);
+          this.$message({
+            message: "删除成功",
+            type: "success"
+          });
         })
         .catch(err => {});
     }

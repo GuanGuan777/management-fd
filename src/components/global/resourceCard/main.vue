@@ -71,7 +71,7 @@
               <span class="dot">...</span>
             </div>
           </el-image>
-          <icon v-if="data.type === 2" class="iconfont fd-bofang icon-start"></icon>
+          <i v-if="data.type === 2" class="iconfont fd-bofang icon-start"></i>
         </div>
         <el-dialog title="视频播放" :visible.sync="dialogVideoVisible" @close="handleClose">
           <my-video ref="myPlayer" :src="data.url" :cover="data.cover"></my-video>

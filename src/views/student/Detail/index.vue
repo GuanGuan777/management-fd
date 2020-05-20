@@ -4,8 +4,9 @@
       <div class="container">
         <el-tag>2019-2020 2</el-tag>
         <div class="title">
-          <h2>高等数学</h2>
+          <h2>{{courseDetail.title}}</h2>
         </div>
+        <div class="desc">{{courseDetail.description}}</div>
       </div>
     </header>
     <div class="mainColumn">
@@ -14,7 +15,7 @@
           <el-timeline-item
             v-for="item in fileterResourceList"
             :key="item.resourceId"
-            timestamp="2018/4/12"
+            timestamp="2020/4/12"
             placement="top"
           >
             <resource-card :data="item"></resource-card>
@@ -26,8 +27,8 @@
   </div>
 </template>
 <script>
-import { getCourseDetail } from "@/api/user";
-import { getResource } from "@/api/course";
+// import { getCourseDetail } from "@/api/user";
+import { getResource, getCourseDetail } from "@/api/course";
 import resourceCard from "@/components/global/resourceCard";
 import asideCard from "./components/asideCard";
 import { mapGetters } from "vuex";
@@ -36,7 +37,8 @@ export default {
   name: "Detail",
   data() {
     return {
-      resourceList: []
+      resourceList: [],
+      courseDetail: {}
     };
   },
   computed: {
@@ -66,10 +68,20 @@ export default {
         .catch(err => {
           console.error(err);
         });
+    },
+    getCourse(id) {
+      getCourseDetail(id)
+        .then(result => {
+          this.courseDetail = result.data.data;
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   },
   mounted() {
     this.getResourceList(this.$route.params.cid);
+    this.getCourse(this.$route.params.cid);
   },
   components: {
     resourceCard: resourceCard,
